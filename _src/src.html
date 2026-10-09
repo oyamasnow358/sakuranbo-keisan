@@ -83,12 +83,12 @@
   .island { background: #fff; border-radius: 28px; border: 4px solid var(--c); padding: 10px 14px 14px; }
   .island h2 { margin: 0 0 8px; font-size: clamp(19px, 2.5vw, 27px); color: var(--c); display: flex; align-items: center; gap: 8px; }
   .sgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(160px, 28vw), 1fr)); gap: 10px; }
-  .scard { position: relative; border: 4px solid var(--line); border-radius: 22px; background: #FFFCFA; padding: 8px 6px 6px; display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; font-size: clamp(14px, 1.8vw, 18px); line-height: 1.25; min-height: 116px; }
-  .scard .no { position: absolute; left: 8px; top: 6px; width: 30px; height: 30px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; font-size: 15px; }
-  .scard .pv { font-size: clamp(24px, 3vw, 32px); color: var(--c); height: 44px; display: grid; place-items: center; letter-spacing: .02em; }
-  .scard .st { font-size: 20px; letter-spacing: 2px; color: var(--gold); }
-  .scard .st i { font-style: normal; color: #DEE2E6; }
-  .scard.lock { opacity: .45; }
+  .scard { position: relative; border: 4px solid var(--line); border-radius: 22px; background: #FFFCFA; padding: 8px 6px 6px; display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; font-size: clamp(14px, 1.8vw, 18px); line-height: 1.25; min-height: 116px; padding-top: 30px; }
+  .scard .no { position: absolute; left: 6px; top: 4px; width: 28px; height: 28px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; font-size: 15px; }
+  .scard .pv { font-size: clamp(17px, 2.2vw, 26px); color: var(--c); height: 36px; display: grid; place-items: center; white-space: nowrap; max-width: 100%; overflow: hidden; }
+  .scard .stars3 { font-size: 20px; letter-spacing: 2px; color: var(--gold); }
+  .scard .stars3 i { font-style: normal; color: #DEE2E6; }
+  .scard.lock { opacity: .62; filter: grayscale(.5); }
   .scard.next { border-color: var(--c); box-shadow: 0 0 0 4px rgba(250, 176, 5, .5); animation: pulse 1s ease-in-out infinite alternate; }
   .scard:active { transform: translateY(3px); }
 
@@ -202,7 +202,7 @@
     .pad button { width: 46px; height: 46px; border-radius: 12px; font-size: 22px; } .pad .disp { font-size: 30px; }
     .hint { font-size: 13px; padding: 7px 10px; } .quit { font-size: 12px; padding: 7px 9px; }
     .note10 { font-size: 16px; } .story { font-size: 16px; padding: 8px 10px; }
-    .scard { min-height: 96px; font-size: 13px; border-width: 3px; } .scard .pv { height: 32px; font-size: 20px; } .scard .st { font-size: 15px; }
+    .scard { min-height: 96px; font-size: 13px; border-width: 3px; } .scard .pv { height: 26px; font-size: 15px; } .scard { padding-top: 26px; } .scard .no { width: 22px; height: 22px; font-size: 12px; } .scard .stars3 { font-size: 15px; }
     .sgrid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; }
     .island { padding: 8px 8px 10px; border-radius: 20px; }
     .bookgrid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
@@ -626,7 +626,7 @@ function jaSay(t) {
           const st = p.stars[s.id] || 0, open = unlocked(p, i);
           return h('button', { type: 'button', class: 'scard' + (open ? '' : ' lock') + (i === nextI && open ? ' next' : ''), style: '--c:' + isl.c, onclick: () => { if (!tapOk()) return; if (!open) { sfx.ng(); toast('まえの ステージを クリアすると あそべるよ'); return; } sfx.tap(); play(s, i); } },
             h('span', { class: 'no' }, String(i + 1)), h('div', { class: 'pv' }, s.pv), h('div', null, open ? s.n : '🔒 ' + s.n),
-            h('div', { class: 'st' }, [0, 1, 2].map(k => k < st ? '★' : h('i', null, '★'))));
+            h('div', { class: 'stars3' }, [0, 1, 2].map(k => k < st ? '★' : h('i', null, '★'))));
         })))))
     ]);
   }
